@@ -1,0 +1,29 @@
+#docker-compose.yaml
+#docker-compose -f .\eclipse-workspace\Redis\docker-compose.yaml up -d
+#redis
+#6379
+#redis-local
+#docker-compose -f .\eclipse-workspace\Redis\docker-compose.yaml down
+#https://developer.redis.com/howtos/redisjson/using-java  
+
+version: "3.8"
+services:
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: redis-stack
+    restart: always
+    volumes:
+      - redis_volume_data:/data
+    ports:
+      - 6379:6379
+  redis_insight:
+    image: redislabs/redisinsight:latest
+    container_name: redis_insight
+    restart: always
+    ports:
+      - 8001:8001
+    volumes:
+      - redis_insight_volume_data:/db
+volumes:
+  redis_volume_data:
+  redis_insight_volume_data:
